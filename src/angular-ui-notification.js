@@ -51,7 +51,7 @@ angular.module('ui-notification').provider('Notification', function() {
             args.onClose = args.onClose ? args.onClose : options.onClose;
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
 
-            $http.get(args.template,{cache: $templateCache}).success(function(template) {
+            $http.get(args.template,{cache: $templateCache}).then(function(template) {
 
                 var scope = args.scope.$new();
                 scope.message = $sce.trustAsHtml(args.message);
@@ -184,7 +184,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 deferred.resolve(scope);
 
-            }).error(function(data){
+            }, function(data){
                 throw new Error('Template ('+args.template+') could not be loaded. ' + data);
             });
 
