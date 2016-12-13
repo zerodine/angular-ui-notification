@@ -21,8 +21,7 @@ angular.module('ui-notification').provider('Notification', function() {
         templateUrl: 'angular-ui-notification.html',
         onClose: undefined,
         closeOnClick: true,
-        maxCount: 0, // 0 - Infinite
-        container: 'body'
+        maxCount: 0 // 0 - Infinite
     };
 
     this.setOptions = function(options) {
@@ -58,7 +57,6 @@ angular.module('ui-notification').provider('Notification', function() {
             args.replaceMessage = args.replaceMessage ? args.replaceMessage : options.replaceMessage;
             args.onClose = args.onClose ? args.onClose : options.onClose;
             args.closeOnClick = (args.closeOnClick !== null && args.closeOnClick !== undefined) ? args.closeOnClick : options.closeOnClick;
-            args.container = args.container ? args.container : options.container;
 
             $http.get(args.template,{cache: $templateCache}).then(function(template) {
 
@@ -111,7 +109,7 @@ angular.module('ui-notification').provider('Notification', function() {
                     }
                 };
 
-                var templateElement = $compile(template)(scope);
+                var templateElement = $compile(template.data)(scope);
                 templateElement._positionY = args.positionY;
                 templateElement._positionX = args.positionX;
                 templateElement.addClass(args.type);
@@ -145,7 +143,7 @@ angular.module('ui-notification').provider('Notification', function() {
 
                 setCssTransitions('none');
 
-                angular.element(document.querySelector(args.container)).append(templateElement);
+                angular.element(document.getElementsByTagName('body')).append(templateElement);
                 var offset = -(parseInt(templateElement[0].offsetHeight) + 50);
                 templateElement.css(templateElement._positionY, offset + "px");
                 messageElements.push(templateElement);
