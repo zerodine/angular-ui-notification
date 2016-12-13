@@ -1,3 +1,6 @@
+THIS IS JUST A QUICKFIX TO MAKE IT WORK WITH ANGULAR 1.6.0
+==========================================================
+
 angular-ui-notification
 =======================
 
